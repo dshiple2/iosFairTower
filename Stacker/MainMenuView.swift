@@ -31,11 +31,10 @@ struct MainMenuView: View {
                     .frame(width: 100)
                     .zIndex(2)
                 VStack {
-                    Text("Fair Tower")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .padding(25)
-                        .foregroundColor(.white)
+                    Image("MenuScreen")
+                        .resizable()
+                          .frame(width: 300, height: 300)
+                          .padding()
                     NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true)) {
                         Text("Play")
                     }
