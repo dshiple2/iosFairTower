@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B4494F2E296B96BF00AB0117 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4494F2D296B96BF00AB0117 /* MainMenuView.swift */; };
 		B47BCC85296333F000BE6A34 /* StackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47BCC84296333F000BE6A34 /* StackerApp.swift */; };
 		B47BCC87296333F000BE6A34 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47BCC86296333F000BE6A34 /* ContentView.swift */; };
 		B47BCC89296333F300BE6A34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B47BCC88296333F300BE6A34 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B4494F2D296B96BF00AB0117 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		B47BCC81296333F000BE6A34 /* Stacker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stacker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B47BCC84296333F000BE6A34 /* StackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackerApp.swift; sourceTree = "<group>"; };
 		B47BCC86296333F000BE6A34 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 				B47BCC86296333F000BE6A34 /* ContentView.swift */,
 				B47BCC88296333F300BE6A34 /* Assets.xcassets */,
 				B47BCC8A296333F300BE6A34 /* Preview Content */,
+				B4494F2D296B96BF00AB0117 /* MainMenuView.swift */,
 			);
 			path = Stacker;
 			sourceTree = "<group>";
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4494F2E296B96BF00AB0117 /* MainMenuView.swift in Sources */,
 				B47BCC87296333F000BE6A34 /* ContentView.swift in Sources */,
 				B47BCC85296333F000BE6A34 /* StackerApp.swift in Sources */,
 			);
@@ -267,6 +271,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Stacker/Preview Content\"";
+				DEVELOPMENT_TEAM = 8S7F5Z9HMK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -295,6 +300,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Stacker/Preview Content\"";
+				DEVELOPMENT_TEAM = 8S7F5Z9HMK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
