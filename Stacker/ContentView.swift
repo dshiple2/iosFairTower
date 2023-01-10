@@ -16,6 +16,7 @@ struct ContentView: View {
     var columns = 9
     var rows = 9
     @State var timer = Timer.publish(every: 0.15, on: .main, in: .common).autoconnect()
+    @State var game = true
     @State var score = 0
     @State var currBlock: [Int] = [3,4,5]
     @State var lastRowBlock: [Int] = [3,4,5]
@@ -79,11 +80,80 @@ struct ContentView: View {
                     }
                     if currBlock.isEmpty {
                         showText = true
+                        game = false
                     }
                 })
-                .gesture(
-                        DragGesture(minimumDistance: 0, coordinateSpace: .global)
-                            .onChanged { _ in
+                if showText {
+                    ZStack{
+                        VStack{
+                            ZStack{
+                                Image("GameOver")
+                                    .resizable()
+                                    .padding(.leading, 15.0)
+                                    .padding(.top, 30.0)
+                                    .frame(width: 400, height: 325)
+                                let scoreString = String(score)
+                                Text(scoreString)
+                                    .font(.title)
+                                    .fontWeight(.bold)
+                                    .padding(.top, 125.0)
+                                    .padding(.trailing, 15.0)
+                                    .padding()
+                                    .foregroundColor(.white)
+                            }
+                            HStack{
+                                Button(action: {
+                                    timer = Timer.publish(every: 0.15, on: .main, in: .common).autoconnect()
+                                    
+                                    game = true
+                                    showText = false
+                                    score = 0
+                                    currBlock = [3,4,5]
+                                    lastRowBlock = [3,4,5]
+                                    currIndex = 0
+                                    newCurrBlock = []
+                                    fallOffSquares = []
+                                    currDirection = "R"
+                                    currRow = 8
+                                    showText = false
+                                    colors = [[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .blue, .blue, .blue, .gray, .gray, .gray]]
+                                }) {
+                                    Image("PlayAgainButton")
+                                        .resizable()
+                                        .frame(width: 116.01, height: 75)
+                                    
+                                }
+                                .padding(.trailing, 5.0)
+                                
+                                
+                                Button(action: {
+                                }) {
+                                    NavigationLink(destination: MainMenuView().navigationBarBackButtonHidden(true)) {
+                                        Image("MenuButton")
+                                            .resizable()
+                                            .frame(width: 110.52, height: 71.45)
+                                        
+                                    }
+                                }
+                                
+                            }
+                            .padding(.bottom, 28.0)
+                        }
+                    }
+                    .fixedSize(horizontal: false, vertical: true)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                    .frame(width: 300, height: 125)
+                    .background(RoundedRectangle(cornerRadius: 35, style: .continuous).fill(Color(red: 0, green: 0.151, blue: 0.195)).frame(width: 500, height: 440))
+                    .navigationBarBackButtonHidden(true)
+                    .zIndex(4)
+                }
+            }
+            .gesture(
+                    DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                        .onChanged { _ in
+                            if game {
+                                game = false
                                 score = score + 1
                                 if currRow != rows - 1 {
                                     fallOffSquares = Set(currBlock).subtracting(Set(lastRowBlock))
@@ -121,74 +191,15 @@ struct ContentView: View {
                                     timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
                                 }
                             }
-                            .onEnded { _ in
-                            }
-                    )
-                .padding(13.0)
-                .navigationBarBackButtonHidden(true)
-                if showText {
-                    ZStack{
-                        Color(red: 0, green: 0.151, blue: 0.195).ignoresSafeArea()
-                        VStack{
-                            Text("Game Over")
-                                .padding()
-                                .foregroundColor(.white)
-                            let endString = "Score: " + String(score - 1)
-                            Text(endString)
-                                .padding()
-                                .foregroundColor(.white)
-                            HStack{
-                                Button(action: {
-                                    timer = Timer.publish(every: 0.15, on: .main, in: .common).autoconnect()
-                                    
-                                    showText = false
-                                    score = 0
-                                    currBlock = [3,4,5]
-                                    lastRowBlock = [3,4,5]
-                                    currIndex = 0
-                                    newCurrBlock = []
-                                    fallOffSquares = []
-                                    currDirection = "R"
-                                    currRow = 8
-                                    showText = false
-                                    colors = [[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .blue, .blue, .blue, .gray, .gray, .gray]]
-                                }) {
-                                    Text("Play Again")
-                                        .foregroundColor(.blue)
-                                        .padding()
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 20)
-                                                .stroke(Color.blue, lineWidth: 5)
-                                        )
-                                }
-                                
-                                
-                                Button(action: {
-                                }) {
-                                    NavigationLink(destination: MainMenuView().navigationBarBackButtonHidden(true)) {
-                                        Text("Main Menu")
-                                            .foregroundColor(.blue)
-                                            .padding()
-                                            .overlay(
-                                                RoundedRectangle(cornerRadius: 20)
-                                                    .stroke(Color.blue, lineWidth: 5)
-                                            )
-                                        
-                                    }
-                                }
-                                
-                            }
                         }
-                    }
-                    .fixedSize(horizontal: false, vertical: true)
-                    .multilineTextAlignment(.center)
-                    .padding()
-                    .frame(width: 300, height: 200)
-                    .background(RoundedRectangle(cornerRadius: 25, style: .continuous).fill(Color(red: 0, green: 0.151, blue: 0.195)).shadow(radius: 3))
-                    .navigationBarBackButtonHidden(true)
-                    .zIndex(4)
-                }
-            }
+                        .onEnded { _ in
+                            game = true
+
+                        }
+                )
+            .padding(13.0)
+            .navigationBarBackButtonHidden(true)
+            .background(Color(red: 0, green: 0.151, blue: 0.195))
         }
         
     }

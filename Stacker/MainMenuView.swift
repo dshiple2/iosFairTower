@@ -36,14 +36,13 @@ struct MainMenuView: View {
                           .frame(width: 300, height: 300)
                           .padding()
                     NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true)) {
-                        Text("Play")
+                        Image("PlayButton")
+                            .resizable()
+                            .frame(width: 154.68, height: 100)
                     }
                     .foregroundColor(.blue)
                     .padding()
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(Color.blue, lineWidth: 5)
-                    )
+
                 }
                 .zIndex(3)
                 .navigationBarBackButtonHidden(true)
