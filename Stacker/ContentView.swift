@@ -13,8 +13,19 @@ var time = 0.5
 //var timer = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()
 
 struct ContentView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var columns = 9
     var rows = 9
+    var menuButton : some View { Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+            }) {
+                Image("MenuButton")
+                    .resizable()
+                    .frame(width: 110.52, height: 71.45)
+            }
+        }
+
+    
     @State var timer = Timer.publish(every: 0.15, on: .main, in: .common).autoconnect()
     @State var game = true
     @State var score = 0
@@ -28,7 +39,7 @@ struct ContentView: View {
     @State var showText = false
     @State var colors: [[Color]] = [[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray, .gray],[.gray, .gray, .gray, .blue, .blue, .blue, .gray, .gray, .gray]]
     var body: some View {
-        NavigationView {
+//        NavigationView {
             ZStack{
                 Color(red: 0, green: 0.151, blue: 0.195).ignoresSafeArea()
                 RoundedRectangle(cornerRadius: 25.0)
@@ -126,15 +137,9 @@ struct ContentView: View {
                                 .padding(.trailing, 5.0)
                                 
                                 
-                                Button(action: {
-                                }) {
-                                    NavigationLink(destination: MainMenuView().navigationBarBackButtonHidden(true)) {
-                                        Image("MenuButton")
-                                            .resizable()
-                                            .frame(width: 110.52, height: 71.45)
-                                        
-                                    }
-                                }
+                                menuButton
+                                    
+
                                 
                             }
                             .padding(.bottom, 28.0)
@@ -145,7 +150,6 @@ struct ContentView: View {
                     .padding()
                     .frame(width: 300, height: 125)
                     .background(RoundedRectangle(cornerRadius: 35, style: .continuous).fill(Color(red: 0, green: 0.151, blue: 0.195)).frame(width: 500, height: 440))
-                    .navigationBarBackButtonHidden(true)
                     .zIndex(4)
                 }
             }
@@ -195,14 +199,19 @@ struct ContentView: View {
                         .onEnded { _ in
                             game = true
 
-                        }
+                    }
                 )
-            .padding(13.0)
             .navigationBarBackButtonHidden(true)
+            .navigationBarHidden(true)
+            .navigationBarItems(leading: menuButton)
+            .padding(13.0)
             .background(Color(red: 0, green: 0.151, blue: 0.195))
         }
+
+
+
         
-    }
+//    }
     func forwardMove() -> Void {
         if currBlock.last ?? currBlock[0] < columns {
             currBlock.append((currBlock.last ?? currBlock[0])+1)

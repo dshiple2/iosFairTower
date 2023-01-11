@@ -35,7 +35,8 @@ struct MainMenuView: View {
                         .resizable()
                           .frame(width: 300, height: 300)
                           .padding()
-                    NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true)) {
+                    NavigationLink(destination: ContentView()            
+) {
                         Image("PlayButton")
                             .resizable()
                             .frame(width: 154.68, height: 100)
@@ -45,7 +46,6 @@ struct MainMenuView: View {
 
                 }
                 .zIndex(3)
-                .navigationBarBackButtonHidden(true)
             }
         }
         }
